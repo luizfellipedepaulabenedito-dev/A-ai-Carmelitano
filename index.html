@@ -171,16 +171,20 @@ function abrirAdicionais(produto){
 function fecharModal(){
   document.getElementById("modal").style.display="none";
 }
+
 function enviarPedido(){
   let adicionais=[];
   document.querySelectorAll(".checkAdicional").forEach(item=>{
     if(item.checked) adicionais.push(item.value);
   });
-  let mensagem="Olá, quero pedir: "+produtoSelecionado;
-  if(adicionais.length>0) mensagem+="%0AAdicionais: "+adicionais.join(", ");
-  let numero="5535998911405";
-  let url="https://wa.me/"+numero+"?text="+mensagem;
-  window.open(url,"_blank");
+
+  let mensagem = "Oii, quero pedir: " + produtoSelecionado;
+  if(adicionais.length > 0) mensagem += "\nAdicionais: " + adicionais.join(", ");
+
+  let numero = "5535998911405";
+  let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+
+  window.open(url, "_blank");
   fecharModal();
 }
 
@@ -221,7 +225,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 300ml</h3>
       <p class="preco">R$ 16,00</p>
-      <button onclick="abrirAdicionais('Açaí 300ml')">Comprar</button>
+      <button onclick="abrirAdicionais('acai 300ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -229,7 +233,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 400ml</h3>
       <p class="preco">R$ 18,00</p>
-      <button onclick="abrirAdicionais('Açaí 400ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 400ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -237,7 +241,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 500ml</h3>
       <p class="preco">R$ 21,00</p>
-      <button onclick="abrirAdicionais('Açaí 500ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 500ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -245,7 +249,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 700ml</h3>
       <p class="preco">R$ 25,00</p>
-      <button onclick="abrirAdicionais('Açaí 700ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 700ml')">Comprar</button>
     </div>
   </div>
 </div>
@@ -258,7 +262,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 300ml</h3>
       <p class="preco">R$ 16,00</p>
-      <button onclick="abrirAdicionais('Cupuaçu 300ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 300ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -266,7 +270,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 400ml</h3>
       <p class="preco">R$ 18,00</p>
-      <button onclick="abrirAdicionais('Cupuaçu 400ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 400ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -274,7 +278,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 500ml</h3>
       <p class="preco">R$ 21,00</p>
-      <button onclick="abrirAdicionais('Cupuaçu 500ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 500ml')">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -282,7 +286,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 700ml</h3>
       <p class="preco">R$ 25,00</p>
-      <button onclick="abrirAdicionais('Cupuaçu 700ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 700ml')">Comprar</button>
     </div>
   </div>
 </div>
@@ -382,8 +386,9 @@ function toggleSuporte(){
 <!-- ================= Modal de adicionais ================= -->
 <div class="modal" id="modal">
   <div class="modal-content">
-    <h3>Escolha os adicionais</h3>
-    <b>Cremes & Doces</b>
+    <h3>Escolha 3 adicionais gratis</h3>]
+    
+   <b></b>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite Ninho"> Leite Ninho</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite condensado"> Leite condensado</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Beijinho"> Beijinho</div>
@@ -392,7 +397,7 @@ function toggleSuporte(){
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Paçoca"> Paçoca</div>
 
     <br>
-    <b>Cereais & Crocantes</b>
+    <b></b>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granola"> Granola</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Sucrilhos"> Sucrilhos</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Amendoim granulado"> Amendoim granulado</div>
@@ -405,7 +410,7 @@ function toggleSuporte(){
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cookies granulado"> Cookies granulado</div>
 
     <br>
-    <b>Frutas</b>
+    <b></b>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Banana"> Banana</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Uva"> Uva</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Morango"> Morango</div>
@@ -414,7 +419,7 @@ function toggleSuporte(){
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Abacaxi ao vinho"> Abacaxi ao vinho</div>
 
     <br>
-    <b>Caldas & Mousses</b>
+    <b></b>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de morango"> Geleia de morango</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de frutas vermelhas"> Geleia de frutas vermelhas</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de maracujá"> Geleia de maracujá</div>
@@ -423,7 +428,7 @@ function toggleSuporte(){
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de limão"> Mousse de limão</div>
 
     <br>
-    <b>Guloseimas</b>
+    <b></b>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Bala de goma"> Bala de goma</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Docile"> Gelatina Docile</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Beijos"> Gelatina Beijos</div>
@@ -434,6 +439,23 @@ function toggleSuporte(){
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereja"> Cereja</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Chantilly"> Chantilly</div>
     <div class="adicional"><input type="checkbox" class="checkAdicional" value="Flocos macio gourmet"> Flocos macio gourmet (branco e chocolate)</div>
+
+  
+ <h3>adicionais pagos</h3>
+    <b></b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="nutella R$5,00">nutella R$5,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="kik ket R$5,00"> kik ket R5,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="sonho de valsa R$3,00"> sonho de valsa R$3,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="ouro branco R$3,00"> ouro branco R$3,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de leite ninho R$4,00"> creme de leite ninho R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de ovo maltine R$4,00"> creme de ovo maltine R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de amendoim R$4,00"> creme de amendoim R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de avela R$4,00"> creme de avela R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="chocotella R$4,00"> chocotella R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de bis branco R$4,00"> creme de bis branco R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de bis preto R$4,00"> creme de bis preto R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de choconesco R$4,00"> creme de choconesco R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de chocobombom R$4,00"> creme de chocobombom R$4,00</div>
 
     <br>
     <button onclick="enviarPedido()">Enviar Pedido</button>
