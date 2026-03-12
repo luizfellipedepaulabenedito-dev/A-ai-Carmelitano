@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,363 +6,440 @@
 <title>Açaí Carmeliano</title>
 
 <style>
-
 body{
-font-family:Arial;
-margin:0;
-background:linear-gradient(135deg,#4b0066,#8e00c2);
-color:white;
+  font-family: Arial;
+  margin:0;
+  background:linear-gradient(135deg,#4b0066,#8e00c2);
+  color:white;
 }
 
+/* Header */
 header{
-text-align:center;
-padding:30px;
-background:#3a004f;
-box-shadow:0 5px 15px rgba(0,0,0,0.5);
+  text-align:center;
+  padding:30px;
+  background:#3a004f;
+  box-shadow:0 5px 15px rgba(0,0,0,0.5);
 }
+header h1{ margin:0; font-size:40px; }
+header p{ margin:5px 0 0 0; }
 
-.container{
-padding:30px;
-max-width:1200px;
-margin:auto;
-}
-
+/* Container */
+.container{ padding:30px; max-width:1200px; margin:auto; }
 h2{
-margin-top:40px;
-border-bottom:2px solid white;
-padding-bottom:10px;
+  margin-top:40px;
+  border-bottom:2px solid white;
+  padding-bottom:10px;
 }
 
+/* Grid de produtos */
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-gap:20px;
-margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+  margin-top:20px;
 }
 
+/* Card de produtos */
 .card{
-background:white;
-color:#333;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 6px 20px rgba(0,0,0,0.3);
-transition:0.3s;
+  background:white;
+  color:#333;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  transition:0.3s;
 }
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.card-body{
-padding:15px;
-text-align:center;
-}
-
-.preco{
-color:#8e00c2;
-font-weight:bold;
-font-size:18px;
-}
-
+.card:hover{ transform:scale(1.05); }
+.card img{ width:100%; height:180px; object-fit:cover; }
+.card-body{ padding:15px; text-align:center; }
+.preco{ color:#8e00c2; font-weight:bold; font-size:18px; }
 button{
-margin-top:10px;
-padding:10px;
-border:none;
-background:#8e00c2;
-color:white;
-border-radius:8px;
-cursor:pointer;
-width:100%;
+  margin-top:10px;
+  padding:10px;
+  border:none;
+  background:#8e00c2;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  width:100%;
 }
+button:hover{ background:#b000ff; }
 
-button:hover{
-background:#b000ff;
-}
-
-/* MODAL */
-
+/* Modal de adicionais */
 .modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
 }
-
 .modal-content{
-background:white;
-color:black;
-padding:20px;
-border-radius:15px;
-width:320px;
-max-height:80vh;
-overflow:auto;
+  background:white;
+  color:black;
+  padding:20px;
+  border-radius:15px;
+  width:320px;
+  max-height:80vh;
+  overflow:auto;
+}
+.adicional{ margin:5px 0; }
+
+/* Suporte hamburger */
+#btnSuporte{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width:50px;
+  height:50px;
+  background:#8e00c2;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  z-index:1100;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 3px 8px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+}
+#btnSuporte:hover{ background:#b000ff; }
+#btnSuporte span{
+  display:block;
+  width:25px;
+  height:3px;
+  background:white;
+  margin:4px 0;
 }
 
-.adicional{
-margin:5px 0;
+/* Barra lateral de suporte */
+#suporteLateral{
+  position:fixed;
+  top:0;
+  left:-300px;
+  width:280px;
+  height:100%;
+  background:#3a004f;
+  color:white;
+  box-shadow:2px 0 12px rgba(0,0,0,0.5);
+  padding:20px;
+  transition:left 0.4s ease;
+  z-index:1099;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
-
+#suporteLateral.aberto{ left:0; }
+#suporteLateral h3{ margin-bottom:20px; font-weight:bold; font-size:22px; text-align:center; }
+#suporteLateral a{
+  color:#fff;
+  font-size:20px;
+  font-weight:bold;
+  text-decoration:none;
+  background:#8e00c2;
+  padding:15px 25px;
+  border-radius:12px;
+  box-shadow:0 3px 8px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+}
+#suporteLateral a:hover{ background:#b000ff; }
+#btnFecharSuporte{
+  position:absolute;
+  top:15px;
+  right:15px;
+  background:transparent;
+  border:none;
+  color:white;
+  font-size:25px;
+  cursor:pointer;
+  font-weight:bold;
+  line-height:1;
+}
 </style>
 
 <script>
-
-let produtoSelecionado=""
+let produtoSelecionado="";
 
 function abrirAdicionais(produto){
-produtoSelecionado=produto
-document.getElementById("modal").style.display="flex"
+  produtoSelecionado=produto;
+  document.getElementById("modal").style.display="flex";
 }
-
 function fecharModal(){
-document.getElementById("modal").style.display="none"
+  document.getElementById("modal").style.display="none";
 }
-
 function enviarPedido(){
-
-let adicionais=[]
-let checks=document.querySelectorAll(".checkAdicional")
-
-checks.forEach(function(item){
-if(item.checked){
-adicionais.push(item.value)
-}
-})
-
-let mensagem="Olá, quero pedir: "+produtoSelecionado
-
-if(adicionais.length>0){
-mensagem+="%0AAdicionais: "+adicionais.join(", ")
+  let adicionais=[];
+  document.querySelectorAll(".checkAdicional").forEach(item=>{
+    if(item.checked) adicionais.push(item.value);
+  });
+  let mensagem="Olá, quero pedir: "+produtoSelecionado;
+  if(adicionais.length>0) mensagem+="%0AAdicionais: "+adicionais.join(", ");
+  let numero="5535998911405";
+  let url="https://wa.me/"+numero+"?text="+mensagem;
+  window.open(url,"_blank");
+  fecharModal();
 }
 
-let numero="5535998911405"
-
-let url="https://wa.me/"+numero+"?text="+mensagem
-
-window.open(url,"_blank")
-
-fecharModal()
-
+/* Suporte toggle */
+function toggleSuporte(){
+  document.getElementById("suporteLateral").classList.toggle("aberto");
 }
-
 </script>
-
 </head>
-
 <body>
 
 <header>
-<h1>Açaí Carmeliano</h1>
-<p>Os melhores açaís da cidade</p>
+  <h1>Açaí Carmeliano</h1>
+  <p>Os melhores açaís da cidade</p>
 </header>
+
+<!-- Botão hamburger suporte -->
+<button id="btnSuporte" onclick="toggleSuporte()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- Barra lateral suporte -->
+<div id="suporteLateral">
+  <button id="btnFecharSuporte" onclick="toggleSuporte()">&times;</button>
+  <h3>Suporte WhatsApp</h3>
+  <a href="https://wa.me/5535998911405" target="_blank">+55 35 99891-1405</a>
+</div>
 
 <div class="container">
 
+<!-- ================= Açaí Tradicional ================= -->
 <h2>Açaí Tradicional</h2>
-
 <div class="grid">
-
-<div class="card">
-<img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
-<div class="card-body">
-<h3>Açaí 300ml</h3>
-<p class="preco">R$ 16,00</p>
-<button onclick="abrirAdicionais('Açaí 300ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
-<div class="card-body">
-<h3>Açaí 400ml</h3>
-<p class="preco">R$ 18,00</p>
-<button onclick="abrirAdicionais('Açaí 400ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
-<div class="card-body">
-<h3>Açaí 500ml</h3>
-<p class="preco">R$ 21,00</p>
-<button onclick="abrirAdicionais('Açaí 500ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
-<div class="card-body">
-<h3>Açaí 700ml</h3>
-<p class="preco">R$ 25,00</p>
-<button onclick="abrirAdicionais('Açaí 700ml')">Comprar</button>
-</div>
+  <div class="card">
+    <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
+    <div class="card-body">
+      <h3>Açaí 300ml</h3>
+      <p class="preco">R$ 16,00</p>
+      <button onclick="abrirAdicionais('Açaí 300ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
+    <div class="card-body">
+      <h3>Açaí 400ml</h3>
+      <p class="preco">R$ 18,00</p>
+      <button onclick="abrirAdicionais('Açaí 400ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
+    <div class="card-body">
+      <h3>Açaí 500ml</h3>
+      <p class="preco">R$ 21,00</p>
+      <button onclick="abrirAdicionais('Açaí 500ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
+    <div class="card-body">
+      <h3>Açaí 700ml</h3>
+      <p class="preco">R$ 25,00</p>
+      <button onclick="abrirAdicionais('Açaí 700ml')">Comprar</button>
+    </div>
+  </div>
 </div>
 
-</div>
-
+<!-- ================= Creme de Cupuaçu ================= -->
 <h2>Creme de Cupuaçu</h2>
-
 <div class="grid">
-
-<div class="card">
-<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
-<div class="card-body">
-<h3>Cupuaçu 300ml</h3>
-<p class="preco">R$ 16,00</p>
-<button onclick="abrirAdicionais('Cupuaçu 300ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
-<div class="card-body">
-<h3>Cupuaçu 400ml</h3>
-<p class="preco">R$ 18,00</p>
-<button onclick="abrirAdicionais('Cupuaçu 400ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
-<div class="card-body">
-<h3>Cupuaçu 500ml</h3>
-<p class="preco">R$ 21,00</p>
-<button onclick="abrirAdicionais('Cupuaçu 500ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
-<div class="card-body">
-<h3>Cupuaçu 700ml</h3>
-<p class="preco">R$ 25,00</p>
-<button onclick="abrirAdicionais('Cupuaçu 700ml')">Comprar</button>
-</div>
+  <div class="card">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
+    <div class="card-body">
+      <h3>Cupuaçu 300ml</h3>
+      <p class="preco">R$ 16,00</p>
+      <button onclick="abrirAdicionais('Cupuaçu 300ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
+    <div class="card-body">
+      <h3>Cupuaçu 400ml</h3>
+      <p class="preco">R$ 18,00</p>
+      <button onclick="abrirAdicionais('Cupuaçu 400ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
+    <div class="card-body">
+      <h3>Cupuaçu 500ml</h3>
+      <p class="preco">R$ 21,00</p>
+      <button onclick="abrirAdicionais('Cupuaçu 500ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
+    <div class="card-body">
+      <h3>Cupuaçu 700ml</h3>
+      <p class="preco">R$ 25,00</p>
+      <button onclick="abrirAdicionais('Cupuaçu 700ml')">Comprar</button>
+    </div>
+  </div>
 </div>
 
-</div>
-
+<!-- ================= Marmitex de Açaí ================= -->
 <h2>Marmitex de Açaí</h2>
-
 <div class="grid">
-
-<div class="card">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
-<div class="card-body">
-<h3>Marmitex 500ml</h3>
-<p class="preco">R$ 33,00</p>
-<p>5 adicionais grátis</p>
-<button onclick="abrirAdicionais('Marmitex 500ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
-<div class="card-body">
-<h3>Marmitex 700ml</h3>
-<p class="preco">R$ 37,00</p>
-<p>6 adicionais grátis</p>
-<button onclick="abrirAdicionais('Marmitex 700ml')">Comprar</button>
-</div>
-</div>
-
-<div class="card">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
-<div class="card-body">
-<h3>Marmitex 1200ml</h3>
-<p class="preco">R$ 49,90</p>
-<p>7 adicionais grátis</p>
-<button onclick="abrirAdicionais('Marmitex 1200ml')">Comprar</button>
-</div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
+    <div class="card-body">
+      <h3>Marmitex 500ml</h3>
+      <p class="preco">R$ 33,00</p>
+      <p>5 adicionais grátis</p>
+      <button onclick="abrirAdicionais('Marmitex 500ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
+    <div class="card-body">
+      <h3>Marmitex 700ml</h3>
+      <p class="preco">R$ 37,00</p>
+      <p>6 adicionais grátis</p>
+      <button onclick="abrirAdicionais('Marmitex 700ml')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
+    <div class="card-body">
+      <h3>Marmitex 1200ml</h3>
+      <p class="preco">R$ 49,90</p>
+      <p>7 adicionais grátis</p>
+      <button onclick="abrirAdicionais('Marmitex 1200ml')">Comprar</button>
+    </div>
+  </div>
 </div>
 
+<!-- ================= Milkshakes ================= -->
+<h2>Milkshakes</h2>
+<div class="grid">
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6y6M-N-SHvOu-qD_J_qPZcAkY15SIfyUtUQ&s">
+    <div class="card-body">
+      <h3>Milk Chocolate</h3>
+      <p class="preco">R$ 20,00</p>
+      <button onclick="abrirAdicionais('Milk Chocolate')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6y6M-N-SHvOu-qD_J_qPZcAkY15SIfyUtUQ&s">
+    <div class="card-body">
+      <h3>Milk Morango</h3>
+      <p class="preco">R$ 20,00</p>
+      <button onclick="abrirAdicionais('Milk Morango')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6y6M-N-SHvOu-qD_J_qPZcAkY15SIfyUtUQ&s">
+    <div class="card-body">
+      <h3>Milk Ninho</h3>
+      <p class="preco">R$ 22,00</p>
+      <button onclick="abrirAdicionais('Milk Ninho')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Barcas de Açaí ================= -->
+<h2>Barcas de Açaí</h2>
+<div class="grid">
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8e540scjdQLMxeKQPUmsPITRAPBNlu6I_Eg&s">
+    <div class="card-body">
+      <h3>Barca Pequena</h3>
+      <p class="preco">R$ 35,00</p>
+      <button onclick="abrirAdicionais('Barca Pequena')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8e540scjdQLMxeKQPUmsPITRAPBNlu6I_Eg&s">
+    <div class="card-body">
+      <h3>Barca Média</h3>
+      <p class="preco">R$ 45,00</p>
+      <button onclick="abrirAdicionais('Barca Média')">Comprar</button>
+    </div>
+  </div>
+  <div class="card">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8e540scjdQLMxeKQPUmsPITRAPBNlu6I_Eg&s">
+    <div class="card-body">
+      <h3>Barca Grande</h3>
+      <p class="preco">R$ 65,00</p>
+      <button onclick="abrirAdicionais('Barca Grande')">Comprar</button>
+    </div>
+  </div>
 </div>
 
 </div>
 
-<!-- MODAL DE ADICIONAIS -->
-
+<!-- ================= Modal de adicionais ================= -->
 <div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Escolha os adicionais</h3>
+    <b>Cremes & Doces</b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite Ninho"> Leite Ninho</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite condensado"> Leite condensado</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Beijinho"> Beijinho</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Brigadeiro"> Brigadeiro</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Ovo Maltine"> Ovo Maltine</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Paçoca"> Paçoca</div>
 
-<div class="modal-content">
-  
-  
-<h3>Escolha os adicionais</h3>
+    <br>
+    <b>Cereais & Crocantes</b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granola"> Granola</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Sucrilhos"> Sucrilhos</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Amendoim granulado"> Amendoim granulado</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado de chocolate"> Granulado de chocolate</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado colorido"> Granulado colorido</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado Negresco"> Granulado Negresco</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal preto e branco"> Cereal preto e branco</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal mini branco"> Cereal mini branco</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Chocoboll chocolate"> Chocoboll chocolate</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cookies granulado"> Cookies granulado</div>
 
-<b>Cremes & Doces</b>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite Ninho"> Leite Ninho</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite condensado"> Leite condensado</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Beijinho"> Beijinho</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Brigadeiro"> Brigadeiro</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Ovo Maltine"> Ovo Maltine</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Paçoca"> Paçoca</div>
+    <br>
+    <b>Frutas</b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Banana"> Banana</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Uva"> Uva</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Morango"> Morango</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Kiwi"> Kiwi</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Pêssego"> Pêssego</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Abacaxi ao vinho"> Abacaxi ao vinho</div>
 
-<br>
+    <br>
+    <b>Caldas & Mousses</b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de morango"> Geleia de morango</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de frutas vermelhas"> Geleia de frutas vermelhas</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de maracujá"> Geleia de maracujá</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de maracujá"> Mousse de maracujá</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de morango"> Mousse de morango</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de limão"> Mousse de limão</div>
 
-<b>Cereais & Crocantes</b>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Granola"> Granola</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Sucrilhos"> Sucrilhos</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Amendoim granulado"> Amendoim granulado</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado de chocolate"> Granulado de chocolate</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado colorido"> Granulado colorido</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado Negresco"> Granulado Negresco</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal preto e branco"> Cereal preto e branco</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal mini branco"> Cereal mini branco</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Chocoboll chocolate"> Chocoboll chocolate</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Cookies granulado"> Cookies granulado</div>
+    <br>
+    <b>Guloseimas</b>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Bala de goma"> Bala de goma</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Docile"> Gelatina Docile</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Beijos"> Gelatina Beijos</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mini Xclê"> Mini Xclê</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Dentadura Fini"> Dentadura Fini</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini banana"> Fini banana</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini beijos"> Fini beijos</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereja"> Cereja</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Chantilly"> Chantilly</div>
+    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Flocos macio gourmet"> Flocos macio gourmet (branco e chocolate)</div>
 
-<br>
-
-<b>Frutas</b>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Banana"> Banana</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Uva"> Uva</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Morango"> Morango</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Kiwi"> Kiwi</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Pêssego"> Pêssego</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Abacaxi ao vinho"> Abacaxi ao vinho</div>
-
-<br>
-
-<b>Caldas & Mousses</b>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de morango"> Geleia de morango</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de frutas vermelhas"> Geleia de frutas vermelhas</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de maracujá"> Geleia de maracujá</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de maracujá"> Mousse de maracujá</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de morango"> Mousse de morango</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de limão"> Mousse de limão</div>
-
-<br>
-
-<b>Guloseimas</b>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Bala de goma"> Bala de goma</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Docile"> Gelatina Docile</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Beijos"> Gelatina Beijos</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Mini Xclê"> Mini Xclê</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Dentadura Fini"> Dentadura Fini</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini banana"> Fini banana</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini beijos"> Fini beijos</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereja"> Cereja</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Chantilly"> Chantilly</div>
-<div class="adicional"><input type="checkbox" class="checkAdicional" value="Flocos macio gourmet"> Flocos macio gourmet (branco e chocolate)</div>
-
-<br>
-
-<button onclick="enviarPedido()">Enviar Pedido</button>
-<br><br>
-<button onclick="fecharModal()">Cancelar</button>
-
-</div>
-
+    <br>
+    <button onclick="enviarPedido()">Enviar Pedido</button>
+    <br><br>
+    <button onclick="fecharModal()">Cancelar</button>
+  </div>
 </div>
 
 <footer style="text-align:center;padding:20px;background:#3a004f;margin-top:40px;">
@@ -372,4 +448,3 @@ fecharModal()
 
 </body>
 </html>
-```
