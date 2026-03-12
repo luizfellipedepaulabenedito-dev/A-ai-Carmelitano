@@ -85,7 +85,28 @@ button:hover{ background:#b000ff; }
   max-height:80vh;
   overflow:auto;
 }
-.adicional{ margin:5px 0; }
+
+.modal-content{
+  background:white;
+  color:black;
+  padding:20px;
+  border-radius:15px;
+  width:650px;
+  max-height:80vh;
+  overflow:auto;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.modal-content h3{
+  grid-column:span 2;
+}
+
+.modal-content button{
+  grid-column:span 2;
+}
 
 /* Suporte hamburger */
 #btnSuporte{
@@ -162,37 +183,65 @@ button:hover{ background:#b000ff; }
 </style>
 
 <script>
-let produtoSelecionado="";
 
-function abrirAdicionais(produto){
+let produtoSelecionado="";
+let precoProduto=0;
+
+function abrirAdicionais(produto,preco){
   produtoSelecionado=produto;
+  precoProduto=preco;
   document.getElementById("modal").style.display="flex";
 }
+
 function fecharModal(){
   document.getElementById("modal").style.display="none";
 }
 
 function enviarPedido(){
+
   let adicionais=[];
+  let total = precoProduto;
+
   document.querySelectorAll(".checkAdicional").forEach(item=>{
-    if(item.checked) adicionais.push(item.value);
+    if(item.checked){
+
+      adicionais.push(item.value);
+
+      if(item.value.includes("R$")){
+        let valor = item.value.match(/R\$(\d+)/);
+        if(valor){
+          total += parseFloat(valor[1]);
+        }
+      }
+
+    }
   });
 
-  let mensagem = "Oii, quero pedir: " + produtoSelecionado;
-  if(adicionais.length > 0) mensagem += "\nAdicionais: " + adicionais.join(", ");
+  let mensagem = "🍧 Pedido\n\n";
+  mensagem += "Produto: " + produtoSelecionado + "\n";
+  mensagem += "Preço base: R$ " + precoProduto + "\n";
 
-  let numero = "5535998911405";
-  let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem);
+  if(adicionais.length>0){
+    mensagem += "Adicionais: " + adicionais.join(", ") + "\n";
+  }
 
-  window.open(url, "_blank");
+  mensagem += "\n💰 TOTAL: R$ " + total.toFixed(2);
+
+  let numero="5535998911405";
+  let url="https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem);
+
+  window.open(url,"_blank");
+
   fecharModal();
 }
 
-/* Suporte toggle */
+/* suporte */
 function toggleSuporte(){
   document.getElementById("suporteLateral").classList.toggle("aberto");
 }
+
 </script>
+
 </head>
 <body>
 
@@ -225,7 +274,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 300ml</h3>
       <p class="preco">R$ 16,00</p>
-      <button onclick="abrirAdicionais('acai 300ml')">Comprar</button>
+      <button onclick="abrirAdicionais('acai 300ml',16)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -233,7 +282,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 400ml</h3>
       <p class="preco">R$ 18,00</p>
-      <button onclick="abrirAdicionais('Acai 400ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 400ml',18)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -241,7 +290,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 500ml</h3>
       <p class="preco">R$ 21,00</p>
-      <button onclick="abrirAdicionais('Acai 500ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 500ml',21)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -249,7 +298,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Açaí 700ml</h3>
       <p class="preco">R$ 25,00</p>
-      <button onclick="abrirAdicionais('Acai 700ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Acai 700ml',25)">Comprar</button>
     </div>
   </div>
 </div>
@@ -262,7 +311,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 300ml</h3>
       <p class="preco">R$ 16,00</p>
-      <button onclick="abrirAdicionais('Cupuacu 300ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 300ml',16)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -270,7 +319,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 400ml</h3>
       <p class="preco">R$ 18,00</p>
-      <button onclick="abrirAdicionais('Cupuacu 400ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 400ml',18)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -278,7 +327,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 500ml</h3>
       <p class="preco">R$ 21,00</p>
-      <button onclick="abrirAdicionais('Cupuacu 500ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 500ml',21)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -286,7 +335,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Cupuaçu 700ml</h3>
       <p class="preco">R$ 25,00</p>
-      <button onclick="abrirAdicionais('Cupuacu 700ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Cupuacu 700ml',25)">Comprar</button>
     </div>
   </div>
 </div>
@@ -300,7 +349,7 @@ function toggleSuporte(){
       <h3>Marmitex 500ml</h3>
       <p class="preco">R$ 33,00</p>
       <p>5 adicionais grátis</p>
-      <button onclick="abrirAdicionais('Marmitex 500ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Marmitex 500ml',33)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -309,7 +358,7 @@ function toggleSuporte(){
       <h3>Marmitex 700ml</h3>
       <p class="preco">R$ 37,00</p>
       <p>6 adicionais grátis</p>
-      <button onclick="abrirAdicionais('Marmitex 700ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Marmitex 700ml',37)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -318,7 +367,7 @@ function toggleSuporte(){
       <h3>Marmitex 1200ml</h3>
       <p class="preco">R$ 49,90</p>
       <p>7 adicionais grátis</p>
-      <button onclick="abrirAdicionais('Marmitex 1200ml')">Comprar</button>
+      <button onclick="abrirAdicionais('Marmitex 1200ml',49)">Comprar</button>
     </div>
   </div>
 </div>
@@ -331,7 +380,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Milk Chocolate</h3>
       <p class="preco">R$ 20,00</p>
-      <button onclick="abrirAdicionais('Milk Chocolate')">Comprar</button>
+      <button onclick="abrirAdicionais('Milk Chocolate',20)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -339,7 +388,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Milk Morango</h3>
       <p class="preco">R$ 20,00</p>
-      <button onclick="abrirAdicionais('Milk Morango')">Comprar</button>
+      <button onclick="abrirAdicionais('Milk Morango',20)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -347,7 +396,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Milk Ninho</h3>
       <p class="preco">R$ 22,00</p>
-      <button onclick="abrirAdicionais('Milk Ninho')">Comprar</button>
+      <button onclick="abrirAdicionais('Milk Ninho',22)">Comprar</button>
     </div>
   </div>
 </div>
@@ -360,7 +409,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Barca Pequena</h3>
       <p class="preco">R$ 35,00</p>
-      <button onclick="abrirAdicionais('Barca Pequena')">Comprar</button>
+      <button onclick="abrirAdicionais('Barca Pequena',35)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -368,7 +417,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Barca Média</h3>
       <p class="preco">R$ 45,00</p>
-      <button onclick="abrirAdicionais('Barca Média')">Comprar</button>
+      <button onclick="abrirAdicionais('Barca Média',45)">Comprar</button>
     </div>
   </div>
   <div class="card">
@@ -376,7 +425,7 @@ function toggleSuporte(){
     <div class="card-body">
       <h3>Barca Grande</h3>
       <p class="preco">R$ 65,00</p>
-      <button onclick="abrirAdicionais('Barca Grande')">Comprar</button>
+      <button onclick="abrirAdicionais('Barca Grande',65)">Comprar</button>
     </div>
   </div>
 </div>
