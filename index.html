@@ -202,27 +202,31 @@ function enviarPedido(){
   let adicionais=[];
   let total = precoProduto;
 
+  let selecionados = [];
+
   document.querySelectorAll(".checkAdicional").forEach(item=>{
     if(item.checked){
-
-      adicionais.push(item.value);
-
-      if(item.value.includes("R$")){
-        let valor = item.value.match(/R\$(\d+)/);
-        if(valor){
-          total += parseFloat(valor[1]);
-        }
-      }
-
+      selecionados.push(item.value);
     }
+  });
+
+  selecionados.forEach((item,index)=>{
+
+    if(index < 3){
+      adicionais.push(item + " (grátis)");
+    }else{
+      adicionais.push(item + " (+R$3)");
+      total += 3;
+    }
+
   });
 
   let mensagem = "🍧 Pedido\n\n";
   mensagem += "Produto: " + produtoSelecionado + "\n";
-  mensagem += "Preço base: R$ " + precoProduto + "\n";
+  mensagem += "Preço base: R$ " + precoProduto + "\n\n";
 
   if(adicionais.length>0){
-    mensagem += "Adicionais: " + adicionais.join(", ") + "\n";
+    mensagem += "Adicionais:\n" + adicionais.join("\n") + "\n";
   }
 
   mensagem += "\n💰 TOTAL: R$ " + total.toFixed(2);
@@ -233,11 +237,6 @@ function enviarPedido(){
   window.open(url,"_blank");
 
   fecharModal();
-}
-
-/* suporte */
-function toggleSuporte(){
-  document.getElementById("suporteLateral").classList.toggle("aberto");
 }
 
 </script>
