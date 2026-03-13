@@ -215,6 +215,18 @@ button:hover{ background:#b000ff; }
 </style>
 
 <script>
+  
+  function verificarPagamento(){
+  let pagamento = document.getElementById("pagamentoCliente").value
+  let campoTroco = document.getElementById("campoTroco")
+
+  if(pagamento === "Dinheiro"){
+    campoTroco.style.display = "block"
+  }else{
+    campoTroco.style.display = "none"
+  }
+}
+  
 let produtoSelecionado="";
 let precoProduto=0;
 let adicionaisSelecionados=[];
@@ -285,6 +297,7 @@ function confirmarPedido(){
   let nome = document.getElementById("nomeCliente").value
   let endereco = document.getElementById("enderecoCliente").value
   let pagamento = document.getElementById("pagamentoCliente").value
+  let troco = document.getElementById("trocoCliente").value
   let obs = document.getElementById("obsCliente").value
 
   let mensagem = "🍧 Pedido\n\n"
@@ -299,6 +312,11 @@ function confirmarPedido(){
   mensagem += "👤 Nome: " + nome + "\n"
   mensagem += "📍 Endereço: " + endereco + "\n"
   mensagem += "💳 Pagamento: " + pagamento + "\n"
+  
+  if(pagamento === "Dinheiro" && troco){
+  mensagem += "💵 Troco para: " + troco + "\n"
+}
+  
 
   if(obs){
     mensagem += "📝 Observação: " + obs + "\n"
@@ -310,6 +328,12 @@ function confirmarPedido(){
   window.open(url,"_blank")
   document.getElementById("checkoutFinal").style.display="none"
 }
+
+
+
+
+
+
 </script>
 
 </head>
@@ -566,11 +590,17 @@ function confirmarPedido(){
 <label>Endereço</label>
 <input type="text" id="enderecoCliente">
 <label>Forma de pagamento</label>
-<select id="pagamentoCliente">
-<option>Pix</option>
-<option>Dinheiro</option>
-<option>Cartão</option>
+<select id="pagamentoCliente" onchange="verificarPagamento()">
+<option value="">Escolha</option>
+<option value="Pix">Pix</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="Cartão">Cartão</option>
 </select>
+
+<div id="campoTroco" style="display:none;">
+<label>Precisa de troco para quanto?</label>
+<input type="text" id="trocoCliente" placeholder="Ex: troco para 50">
+</div>
 <label>Observação</label>
 <textarea id="obsCliente"></textarea>
 <button onclick="confirmarPedido()">Enviar Pedido</button>
