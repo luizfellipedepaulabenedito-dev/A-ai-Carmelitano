@@ -199,44 +199,60 @@ function fecharModal(){
 
 function enviarPedido(){
 
-  let adicionais=[];
-  let total = precoProduto;
+  let adicionais=[]
+  let total = precoProduto
 
-  let selecionados = [];
+  let gratis=[]
+  let pagos=[]
 
-  document.querySelectorAll(".checkAdicional").forEach(item=>{
+  document.querySelectorAll(".checkGratis").forEach(item=>{
     if(item.checked){
-      selecionados.push(item.value);
+      gratis.push(item.value)
     }
-  });
+  })
 
-  selecionados.forEach((item,index)=>{
+  document.querySelectorAll(".checkPago").forEach(item=>{
+    if(item.checked){
+      pagos.push(item.value)
+
+      let valor = item.value.match(/R\$(\d+)/)
+      if(valor){
+        total += parseFloat(valor[1])
+      }
+    }
+  })
+
+  gratis.forEach((item,index)=>{
 
     if(index < 3){
-      adicionais.push(item + " (grátis)");
+      adicionais.push(item + " (grátis)")
     }else{
-      adicionais.push(item + " (+R$3)");
-      total += 3;
+      adicionais.push(item + " (+R$3)")
+      total += 3
     }
 
-  });
+  })
 
-  let mensagem = "🍧 Pedido\n\n";
-  mensagem += "Produto: " + produtoSelecionado + "\n";
-  mensagem += "Preço base: R$ " + precoProduto + "\n\n";
+  pagos.forEach(item=>{
+    adicionais.push(item)
+  })
+
+  let mensagem = "🍧 Pedido\n\n"
+  mensagem += "Produto: " + produtoSelecionado + "\n"
+  mensagem += "Preço base: R$ " + precoProduto + "\n\n"
 
   if(adicionais.length>0){
-    mensagem += "Adicionais:\n" + adicionais.join("\n") + "\n";
+    mensagem += "Adicionais:\n" + adicionais.join("\n") + "\n"
   }
 
-  mensagem += "\n💰 TOTAL: R$ " + total.toFixed(2);
+  mensagem += "\n💰 TOTAL: R$ " + total.toFixed(2)
 
-  let numero="5535998911405";
-  let url="https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem);
+  let numero="5535998911405"
+  let url="https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem)
 
-  window.open(url,"_blank");
+  window.open(url,"_blank")
 
-  fecharModal();
+  fecharModal()
 }
 
 </script>
@@ -437,73 +453,73 @@ function enviarPedido(){
     <h3>Escolha 3 adicionais gratis</h3>]
     
    <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite Ninho"> Leite Ninho</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Leite condensado"> Leite condensado</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Beijinho"> Beijinho</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Brigadeiro"> Brigadeiro</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Ovo Maltine"> Ovo Maltine</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Paçoca"> Paçoca</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Leite Ninho"> Leite Ninho</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Leite condensado"> Leite condensado</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Beijinho"> Beijinho</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Brigadeiro"> Brigadeiro</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Ovo Maltine"> Ovo Maltine</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Paçoca"> Paçoca</div>
 
     <br>
     <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granola"> Granola</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Sucrilhos"> Sucrilhos</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Amendoim granulado"> Amendoim granulado</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado de chocolate"> Granulado de chocolate</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado colorido"> Granulado colorido</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Granulado Negresco"> Granulado Negresco</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal preto e branco"> Cereal preto e branco</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereal mini branco"> Cereal mini branco</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Chocoboll chocolate"> Chocoboll chocolate</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cookies granulado"> Cookies granulado</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Granola"> Granola</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Sucrilhos"> Sucrilhos</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Amendoim granulado"> Amendoim granulado</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Granulado de chocolate"> Granulado de chocolate</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Granulado colorido"> Granulado colorido</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Granulado Negresco"> Granulado Negresco</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Cereal preto e branco"> Cereal preto e branco</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Cereal mini branco"> Cereal mini branco</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Chocoboll chocolate"> Chocoboll chocolate</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Cookies granulado"> Cookies granulado</div>
 
     <br>
     <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Banana"> Banana</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Uva"> Uva</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Morango"> Morango</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Kiwi"> Kiwi</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Pêssego"> Pêssego</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Abacaxi ao vinho"> Abacaxi ao vinho</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Banana"> Banana</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Uva"> Uva</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Morango"> Morango</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Kiwi"> Kiwi</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Pêssego"> Pêssego</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Abacaxi ao vinho"> Abacaxi ao vinho</div>
 
     <br>
     <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de morango"> Geleia de morango</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de frutas vermelhas"> Geleia de frutas vermelhas</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Geleia de maracujá"> Geleia de maracujá</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de maracujá"> Mousse de maracujá</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de morango"> Mousse de morango</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mousse de limão"> Mousse de limão</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Geleia de morango"> Geleia de morango</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Geleia de frutas vermelhas"> Geleia de frutas vermelhas</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Geleia de maracujá"> Geleia de maracujá</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Mousse de maracujá"> Mousse de maracujá</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Mousse de morango"> Mousse de morango</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Mousse de limão"> Mousse de limão</div>
 
     <br>
     <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Bala de goma"> Bala de goma</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Docile"> Gelatina Docile</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Gelatina Beijos"> Gelatina Beijos</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Mini Xclê"> Mini Xclê</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Dentadura Fini"> Dentadura Fini</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini banana"> Fini banana</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Fini beijos"> Fini beijos</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Cereja"> Cereja</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Chantilly"> Chantilly</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="Flocos macio gourmet"> Flocos macio gourmet (branco e chocolate)</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Bala de goma"> Bala de goma</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Gelatina Docile"> Gelatina Docile</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Gelatina Beijos"> Gelatina Beijos</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Mini Xclê"> Mini Xclê</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Dentadura Fini"> Dentadura Fini</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Fini banana"> Fini banana</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Fini beijos"> Fini beijos</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Cereja"> Cereja</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Chantilly"> Chantilly</div>
+    <div class="adicional"><input type="checkbox" class="checkGratis" value="Flocos macio gourmet"> Flocos macio gourmet (branco e chocolate)</div>
 
   
  <h3>adicionais pagos</h3>
     <b></b>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="nutella R$5,00">nutella R$5,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="kik ket R$5,00"> kik ket R5,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="sonho de valsa R$3,00"> sonho de valsa R$3,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="ouro branco R$3,00"> ouro branco R$3,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de leite ninho R$4,00"> creme de leite ninho R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de ovo maltine R$4,00"> creme de ovo maltine R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de amendoim R$4,00"> creme de amendoim R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de avela R$4,00"> creme de avela R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="chocotella R$4,00"> chocotella R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de bis branco R$4,00"> creme de bis branco R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de bis preto R$4,00"> creme de bis preto R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de choconesco R$4,00"> creme de choconesco R$4,00</div>
-    <div class="adicional"><input type="checkbox" class="checkAdicional" value="creme de chocobombom R$4,00"> creme de chocobombom R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="nutella R$5,00">nutella R$5,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="kik ket R$5,00"> kik ket R5,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="sonho de valsa R$3,00"> sonho de valsa R$3,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="ouro branco R$3,00"> ouro branco R$3,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de leite ninho R$4,00"> creme de leite ninho R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de ovo maltine R$4,00"> creme de ovo maltine R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de amendoim R$4,00"> creme de amendoim R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de avela R$4,00"> creme de avela R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="chocotella R$4,00"> chocotella R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de bis branco R$4,00"> creme de bis branco R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de bis preto R$4,00"> creme de bis preto R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de choconesco R$4,00"> creme de choconesco R$4,00</div>
+    <div class="adicional"><input type="checkbox" class="checkPago" value="creme de chocobombom R$4,00"> creme de chocobombom R$4,00</div>
 
     <br>
     <button onclick="enviarPedido()">Enviar Pedido</button>
