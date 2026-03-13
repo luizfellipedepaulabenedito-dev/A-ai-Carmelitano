@@ -187,6 +187,11 @@ button:hover{ background:#b000ff; }
 let produtoSelecionado="";
 let precoProduto=0;
 
+function toggleSuporte(){
+  const suporte = document.getElementById("suporteLateral");
+  suporte.classList.toggle("aberto");
+}
+
 function abrirAdicionais(produto,preco){
   produtoSelecionado=produto;
   precoProduto=preco;
@@ -215,9 +220,10 @@ function enviarPedido(){
     if(item.checked){
       pagos.push(item.value)
 
-      let valor = item.value.match(/R\$(\d+)/)
+      let valor = item.value.match(/R\$(\d+),?(\d+)?/)
       if(valor){
-        total += parseFloat(valor[1])
+        let numero = valor[1] + "." + (valor[2] || "00")
+        total += parseFloat(numero)
       }
     }
   })
