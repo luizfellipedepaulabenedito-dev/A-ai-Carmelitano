@@ -363,7 +363,8 @@ function confirmarPedido(){
     mensagem += "Adicionais:\n" + adicionaisSelecionados.join("\n") + "\n"
   }
 
-  mensagem += "\n💰 TOTAL: R$ " + totalPedido.toFixed(2) + "\n\n"
+  mensagem += "\n🚚 Taxa de entrega: R$ 4.00\n"
+  mensagem += "\n💰 TOTAL: R$ " + (totalPedido + 4).toFixed(2) + "\n\n"
   mensagem += "👤 Nome: " + nome + "\n"
   mensagem += "📍 Endereço: " + endereco + "\n"
   mensagem += "💳 Pagamento: " + pagamento + "\n"
