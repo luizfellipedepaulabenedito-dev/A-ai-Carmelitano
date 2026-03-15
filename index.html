@@ -325,7 +325,7 @@ function enviarPedidoFondue(){
   document.querySelectorAll(".chocolateFondue").forEach(item=>{
     if(item.checked){
       chocolates++
-      if(chocolates>1){
+      if(chocolates>2){
         item.checked=false
       }else{
         adicionais.push(item.value)
