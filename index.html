@@ -243,8 +243,18 @@ function abrirAdicionais(produto,preco){
   document.getElementById("modal").style.display="flex";
 }
 
+function abrirAdicionaisFondue(produto,preco){
+  produtoSelecionado=produto;
+  precoProduto=preco;
+  document.getElementById("modalFondue").style.display="flex";
+}
+
 function fecharModal(){
   document.getElementById("modal").style.display="none";
+}
+
+function fecharModalFondue(){
+  document.getElementById("modalFondue").style.display="none";
 }
 
 function enviarPedido(){
@@ -289,6 +299,51 @@ function enviarPedido(){
   totalPedido = total
 
   fecharModal()
+
+  document.getElementById("checkoutFinal").style.display="flex"
+}
+
+function enviarPedidoFondue(){
+
+  let adicionais=[]
+  let total = precoProduto
+
+  let frutas=0
+  let chocolates=0
+
+  document.querySelectorAll(".frutaFondue").forEach(item=>{
+    if(item.checked){
+      frutas++
+      if(frutas>2){
+        item.checked=false
+      }else{
+        adicionais.push(item.value)
+      }
+    }
+  })
+
+  document.querySelectorAll(".chocolateFondue").forEach(item=>{
+    if(item.checked){
+      chocolates++
+      if(chocolates>1){
+        item.checked=false
+      }else{
+        adicionais.push(item.value)
+      }
+    }
+  })
+
+  document.querySelectorAll(".cremeFondue").forEach(item=>{
+    if(item.checked){
+      adicionais.push(item.value+" (+R$4)")
+      total +=4
+    }
+  })
+
+  adicionaisSelecionados = adicionais
+  totalPedido = total
+
+  fecharModalFondue()
 
   document.getElementById("checkoutFinal").style.display="flex"
 }
@@ -351,9 +406,6 @@ function verificarLoja(){
 
 verificarLoja()
 
-
-
-
 </script>
 
 </head>
@@ -367,14 +419,12 @@ verificarLoja()
 
 </header>
 
-<!-- Botão hamburger suporte -->
 <button id="btnSuporte" onclick="toggleSuporte()">
   <span></span>
   <span></span>
   <span></span>
 </button>
 
-<!-- Barra lateral suporte -->
 <div id="suporteLateral">
   <button id="btnFecharSuporte" onclick="toggleSuporte()">&times;</button>
   <h3>Suporte WhatsApp</h3>
@@ -383,9 +433,24 @@ verificarLoja()
 
 <div class="container">
 
-<!-- ================= Açaí Tradicional ================= -->
-<h2>Açaí Tradicional</h2>
+<h2>Fondue</h2>
 <div class="grid">
+
+<div class="card">
+<img src="https://s3.us-west-2.amazonaws.com/whatsmenu/production/imperioacaidelivery/products/516949/t645c6ffe88ad48868420e06a9d6d7f54png">
+<div class="card-body">
+<h3>Fondue 480ml</h3>
+<p class="preco">R$ 25,00</p>
+<button onclick="abrirAdicionaisFondue('Fondue 480ml',25)">Comprar</button>
+</div>
+</div>
+
+</div>
+
+<h2>açai tradicional</h2>
+<div class="grid">
+  
+
   <div class="card">
     <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
     <div class="card-body">
@@ -394,6 +459,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Açaí 300ml',16)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
     <div class="card-body">
@@ -402,6 +468,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Açaí 400ml',18)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
     <div class="card-body">
@@ -410,6 +477,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Açaí 500ml',21)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://alloydeliveryimages.s3.sa-east-1.amazonaws.com/item_images/11194/661fe8b591d34qveis.webp">
     <div class="card-body">
@@ -420,7 +488,6 @@ verificarLoja()
   </div>
 </div>
 
-<!-- ================= Creme de Cupuaçu ================= -->
 <h2>Creme de Cupuaçu</h2>
 <div class="grid">
   <div class="card">
@@ -431,6 +498,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Cupuaçu 300ml',16)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
     <div class="card-body">
@@ -439,6 +507,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Cupuaçu 400ml',18)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
     <div class="card-body">
@@ -447,6 +516,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Cupuaçu 500ml',21)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRgjCMMZKHizHaQ9G-ROfnG1HDN3kukoB1iImSJFi1u7SqCVTZg">
     <div class="card-body">
@@ -457,7 +527,6 @@ verificarLoja()
   </div>
 </div>
 
-<!-- ================= Marmitex de Açaí ================= -->
 <h2>Marmitex de Açaí</h2>
 <div class="grid">
   <div class="card">
@@ -469,6 +538,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Marmitex 500ml',33)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
     <div class="card-body">
@@ -478,6 +548,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Marmitex 700ml',37)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa_j_TEWUzEeorcPPuCexsiY5WqtMiLCN9eA&s">
     <div class="card-body">
@@ -489,7 +560,6 @@ verificarLoja()
   </div>
 </div>
 
-<!-- ================= Milkshakes ================= -->
 <h2>Milkshakes</h2>
 <div class="grid">
   <div class="card">
@@ -500,6 +570,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Milk Chocolate',20)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6y6M-N-SHvOu-qD_J_qPZcAkY15SIfyUtUQ&s">
     <div class="card-body">
@@ -508,6 +579,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Milk Morango',20)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6y6M-N-SHvOu-qD_J_qPZcAkY15SIfyUtUQ&s">
     <div class="card-body">
@@ -518,7 +590,6 @@ verificarLoja()
   </div>
 </div>
 
-<!-- ================= Barcas de Açaí ================= -->
 <h2>Barcas de Açaí</h2>
 <div class="grid">
   <div class="card">
@@ -529,6 +600,7 @@ verificarLoja()
       <button onclick="abrirAdicionais('Barca 500ml',28)">Comprar</button>
     </div>
   </div>
+
   <div class="card">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROj8OFWq0f7QTiW-g9NJsPr0bkd9igzzueoA&s">
     <div class="card-body">
@@ -541,7 +613,38 @@ verificarLoja()
 
 </div>
 
-<!-- Modal de adicionais -->
+<div id="modalFondue" class="modal">
+<div class="modal-content">
+
+<h3>Frutas</h3>
+
+<label><input type="checkbox" class="frutaFondue" value="Uva"> Uva</label>
+<label><input type="checkbox" class="frutaFondue" value="Kiwi"> Kiwi</label>
+<label><input type="checkbox" class="frutaFondue" value="Morango"> Morango</label>
+<label><input type="checkbox" class="frutaFondue" value="Banana"> Banana</label>
+
+<h3>Chocolates</h3>
+
+<label><input type="checkbox" class="chocolateFondue" value="Preto"> Preto</label>
+<label><input type="checkbox" class="chocolateFondue" value="Branco"> Branco</label>
+
+<h3>Cremes (+1 = R$4,00)</h3>
+
+<label><input type="checkbox" class="cremeFondue" value="Leite Ninho"> Leite Ninho</label>
+<label><input type="checkbox" class="cremeFondue" value="Avelã"> Avelã</label>
+<label><input type="checkbox" class="cremeFondue" value="Ovomaltine"> Ovomaltine</label>
+<label><input type="checkbox" class="cremeFondue" value="Bis Preto"> Bis Preto</label>
+<label><input type="checkbox" class="cremeFondue" value="Bis Branco"> Bis Branco</label>
+<label><input type="checkbox" class="cremeFondue" value="Choconesco"> Choconesco</label>
+<label><input type="checkbox" class="cremeFondue" value="Chocobombom"> Chocobombom</label>
+<label><input type="checkbox" class="cremeFondue" value="Chocotella"> Chocotella</label>
+
+<button onclick="enviarPedidoFondue()">Adicionar ao Pedido</button>
+<button onclick="fecharModalFondue()">Cancelar</button>
+
+</div>
+</div>
+
 <div id="modal" class="modal">
   <div class="modal-content">
     <h3>escolha 3 adicionais gratis</h3>
@@ -604,7 +707,6 @@ verificarLoja()
   </div>
 </div>
 
-<!-- Tela final do pedido -->
 <div id="checkoutFinal">
 <div class="checkout-box">
 <h3>Finalizar Pedido</h3>
