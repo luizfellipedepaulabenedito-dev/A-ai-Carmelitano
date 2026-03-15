@@ -329,7 +329,27 @@ function confirmarPedido(){
   document.getElementById("checkoutFinal").style.display="none"
 }
 
+function verificarLoja(){
 
+  let agora = new Date()
+  let hora = agora.getHours()
+
+  let abre = 12
+  let fecha = 22
+
+  let status = document.getElementById("statusLoja")
+
+  if(hora >= abre && hora < fecha){
+    status.innerHTML = "🟢 Loja Aberta"
+    status.style.color = "lime"
+  }else{
+    status.innerHTML = "🔴 Loja Fechada"
+    status.style.color = "red"
+  }
+
+}
+
+verificarLoja()
 
 
 
@@ -342,6 +362,9 @@ function confirmarPedido(){
 <header>
   <h1>Açaí Carmelitano</h1>
   <p>Os melhores açaís da cidade</p>
+
+  <h3 id="statusLoja">Verificando horário...</h3>
+
 </header>
 
 <!-- Botão hamburger suporte -->
